@@ -1,11 +1,38 @@
 
 // Assignment code here
+let lengthPrompt = '';
+let lowerCasePrompt = [];
+let upperCasePrompt = [];
+let numericPrompt = [];
+let specialCharacterPrompt = [];
+
+
+let lengthValue = lengthPrompt
+let lowerCaseValues = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+let upperCaseValues = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+let numericValues = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+let specialCharacterValues = ["!", "@", "#", "$", "%", "^","&", "*", "-", "_", "+", "=", ".", "/", "?", ";", ":"]
 
 
 // Get references to the #generate element
 let generateBtn = document.querySelector("#generate");
 //let lengthPrompt = window.prompt('Please enter the LENGTH of your password in DIGITS. It can be from 8 to 128 characters.')
 
+let generateLowerCase = function (lowerCaseValues) {
+  return lowerCaseValues[Math.floor(Math.random() * lowerCaseValues.length)]
+}
+
+let generateUpperCase = function (upperCaseValues) {
+  return upperCaseValues[Math.floor(Math.random() * upperCaseValues.length)]
+}
+
+let generateNumber = function (numericValues) {
+  return numericValues[Math.floor(Math.random() * numericValues.length)]
+}
+
+let generateSpecialCharacter = function (specialCharacterValues) {
+  return specialCharacterValues[Math.floor(Math.random() * specialCharacterValues.length)]
+}
 
 // Write password to the #password input
 function writePassword() {
@@ -17,40 +44,26 @@ function writePassword() {
 
 }
 
-// Add event listener to generate button
 generateBtn.addEventListener("click", function () {
-  let lengthPrompt = window.prompt('Please enter the LENGTH of your password in DIGITS. It can be from 8 to 128 characters.')
+  lengthPrompt = window.prompt('Please enter the LENGTH of your password in DIGITS. It can be from 8 to 128 characterssssss.')
 
   if (lengthPrompt >= 8 && lengthPrompt <= 128) {
-    let lowerCasePrompt = window.prompt('Would you like lower case letters to be included? Please answer YES or NO.')
+    lowerCasePrompt = window.confirm('Would you like lower case letters to be included? Select OK for Yes or Cancel for NO')
 
-    if (lowerCasePrompt === 'yes' || lowerCasePrompt === 'YES' || lowerCasePrompt === 'Yes' || lowerCasePrompt === 'no' || lowerCasePrompt === 'No' || lowerCasePrompt === 'NO') {
-     let upperCasePrompt = window.prompt('Sounds good; would you like to upper case letters to be included?')
-
-     if (upperCasePrompt === 'yes' || upperCasePrompt === 'YES' || upperCasePrompt === 'Yes' || upperCasePrompt === 'no' || upperCasePrompt === 'No' || upperCasePrompt === 'NO') {
-      let numericPrompt = window.prompt('Sounds good; would you like to include any numbers?')
-
-      if (numericPrompt === 'yes' || numericPrompt === 'YES' || numericPrompt === 'Yes' || numericPrompt === 'no' || numericPrompt === 'No' || numericPrompt === 'NO' ) {
-        let specialValuePrompt = window.prompt('Sounds good; Would you like to add any special characters?')
-
-        if (specialValuePrompt === 'yes' || specialValuePrompt === 'YES' || specialValuePrompt === 'Yes' || specialValuePrompt === 'no' || specialValuePrompt === 'No' || specialValuePrompt === 'NO' ) {
-          window.alert('Generating password right now.')
-        } else {
-          window.alert('Please answer yes or no if u want to include special characters.') /////for special characters
-        }
-      }
-      else {
-        window.alert('Please answer the question properly.') ////for numeric prompts
-      }
-
-    } 
-    else {
-      window.alert('Please answer YES or NO to thissss.') //// for uppercase letters
+    if (lowerCasePrompt || !lowerCasePrompt) {
+      upperCasePrompt = window.confirm('Would you like upper case letters to be included in your password?')
     }
 
+    if (upperCasePrompt || !upperCasePrompt) {
+      numericPrompt = window.confirm('Would you like any numbers to be included in your password?')
     }
-    else {
-      window.alert('Please answer YES or NO.') /////for lowercase letters
+
+    if (numericPrompt || !numericPrompt) {
+      specialCharacterPrompt = window.confirm('Would you like any special characters to be included in your password?')
+    }
+
+    if (specialCharacterPrompt || !specialCharacterPrompt) {
+      window.alert('Generating password right now')
     }
 
   } else if (lengthPrompt <= 7) {
@@ -63,19 +76,25 @@ generateBtn.addEventListener("click", function () {
     window.alert('Please enter a number.')
   }
 
-  
+
 });
 
+console.log(generateLowerCase(lowerCaseValues))
+console.log(generateUpperCase(upperCaseValues))
+console.log(generateNumber(numericValues))
+console.log(generateSpecialCharacter(specialCharacterValues))
+// Add event listener to generate button
+////use boolean values??
+///Make the values global
+///remove let keyword inside event listener
+///generate password --> 
+///// All 
 
+///window.confirm
+///include in for loop --> let randomNumber = Math.floor(Math.random() * 4 + 1)
+///let lowerCaseLetter = 'abcd' --> can index this by array
 
 ///generateBtn.addEventListener("click", writePassword) DUPLICATED the above if i need to use again (was in starter code)
 
 
 //// originally in if statement with addEventListener
-
-
-//// this if may not be needed. 
-  ///  if (characterPrompt === undefined || characterPrompt === null) {
-  ///    window.alert('Please try again.')
-  ///  }
-//////
