@@ -40,8 +40,14 @@ let generateSpecialCharacter = function (specialCharacterValues) {
 
 ////I need this to match the lengthValue, only sputing out one value at a time
 let generateUpdatedArray = function (updatedArray) {
-  return updatedArray[Math.floor(Math.random() * updatedArray.length)]
-  
+  let password = ""
+  let updatedString = updatedArray.join('')
+  console.log(updatedString)
+
+  for (let i = 0; i < lengthValue; i++) {
+    password = password + updatedString.charAt(Math.floor(Math.random() * Math.floor(updatedString.length - 1)))
+  }
+  return password 
 }
 
 // Write password to the #password input
