@@ -1,32 +1,20 @@
 
 // Assignment code here
 let lengthPrompt = 0;
-let lowerCasePrompt = [];
-let upperCasePrompt = [];
-let numericPrompt = [];
-let specialCharacterPrompt = [];
+let lowerCasePrompt;
+let upperCasePrompt;
+let numericPrompt;
+let specialCharacterPrompt;
+let userChoicesPWArray = [];
+let updatedArray;
 
 
 let lengthValue = lengthPrompt;
 let lowerCaseValues = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]; //can also make this one big string
 let upperCaseValues = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 let numericValues = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
-let specialCharacterValues = ["!", "@", "#", "$", "%", "^","&", "*", "-", "_", "+", "=", ".", "/", "?", ";", ":"];
+let specialCharacterValues = ["!", "@", "#", "$", "%", "^", "&", "*", "-", "_", "+", "=", ".", "/", "?", ";", ":"];
 
-
-///// not needed
-let lowerCase = 'abcdefghijklmnopqrstuvyxyz'
-let upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-let numbers = '0123456789'
-let special = '!@#$%^&*()-_+={}||[];:,.?/`~'
-
-let upperCaseAndNumbers = 'BCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
-let upperCaseNumbersAndSpecial = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-_+={}||[];:,.?/`~'
-
-let lowerAndUpperCase = 'abcdefghijklmnopqrstuvWxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-let lowerUpperAndNum = 'abcdefghijklmnopqrstuvWxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
-let allValues = 'abcdefghijklmnopqrstuvWxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-_+={}||[];:,.?/`~'
-/////// not needed ^^^
 
 // Get references to the #generate element
 let generateBtn = document.querySelector("#generate");
@@ -35,7 +23,7 @@ let passwordText = document.querySelector("#password");
 
 
 let generateLowerCase = function (lowerCaseValues) {
-  return lowerCaseValues[Math.floor(Math.random() * lowerCaseValues.length)];
+  return lowerCaseValues[Math.floor(Math.random() * lowerCaseValues.length)]; // returns single random value....could push them into an array
 }
 
 let generateUpperCase = function (upperCaseValues) {
@@ -50,9 +38,15 @@ let generateSpecialCharacter = function (specialCharacterValues) {
   return specialCharacterValues[Math.floor(Math.random() * specialCharacterValues.length)];
 }
 
+////I need this to match the lengthValue, only sputing out one value at a time
+let generateUpdatedArray = function (updatedArray) {
+  return updatedArray[Math.floor(Math.random() * updatedArray.length)]
+  
+}
+
 // Write password to the #password input
 function writePassword() {
- // let password = generatePassword();
+  // let password = generatePassword();
   let passwordText = document.querySelector("#password");
 
 
@@ -64,71 +58,99 @@ function writePassword() {
 
 
 
-let generatePassword = function (lowerCase, upperCase, number, specialCharacter, length) {
-/// TODOS: listed below
+let generatePassword = function (array) {
+  /// TODOS: listed below
 
-//// init pw variable
+  //// init pw variable
 
-let generatedPassword = ''
+  let generatedPassword = ''
 
-if (lowerCasePrompt && upperCasePrompt && numericPrompt && specialCharacterPrompt) {
-  console.log('Hi there!')
-} else {
-  console.group('No lowercase string')
+  for (let i = 0; i < lengthValue; i++) {
+
+  }
+
+
+  //// filter out non selected prompts that weren't selected
+
+  //// Loop over length, call a generator function for each type
+
+  //// We need to add final password
+
+  if (lowerCasePrompt && upperCasePrompt && numericPrompt && specialCharacterPrompt) { /// all values
+    updatedArray = userChoicesPWArray.concat(lowerCaseValues, upperCaseValues, numericValues, specialCharacterValues);
+
+
+////May need to edit this.
+   } else if (!lowerCasePrompt && !upperCasePrompt && !numericPrompt && !specialCharacterPrompt) { ////lower upper and numbers
+      window.alert('Oops.')
+      updatedArray = []
+
+
+  } else if (lowerCasePrompt && upperCasePrompt && numericPrompt) { ////lower upper and numbers
+   updatedArray = userChoicesPWArray.concat(lowerCaseValues, upperCaseValues, numericValues )
+
+ } else if (lowerCasePrompt && upperCasePrompt && specialCharacterPrompt) { ///lower upper and special 
+  updatedArray = userChoicesPWArray.concat(lowerCaseValues, upperCaseValues, specialCharacterValues)
+
+  } else if (lowerCasePrompt && numericPrompt && specialCharacterPrompt) {
+   updatedArray = userChoicesPWArray.concat(lowerCaseValues, numericValues, specialCharacterValues)
+
+  } else if (upperCasePrompt && numericPrompt && specialCharacterPrompt) {
+   updatedArray = userChoicesPWArray.concat(upperCaseValues, numericValues, specialCharacterValues)
+
+ } else if (lowerCasePrompt && upperCasePrompt) {
+  updatedArray = userChoicesPWArray.concat(lowerCaseValues, upperCaseValues)
+ } else if (lowerCasePrompt && numericPrompt) {
+  updatedArray = userChoicesPWArray.concat(lowerCaseValues, numericValues)
+ } else if (lowerCasePrompt && specialCharacterPrompt) {
+  updatedArray = userChoicesPWArray.concat(lowerCaseValues, specialCharacterValues)
+ } else if (upperCasePrompt && numericPrompt) {
+  updatedArray = userChoicesPWArray.concat(upperCaseValues, numericValues)
+ } else if (upperCasePrompt && specialCharacterPrompt) {
+  updatedArray = userChoicesPWArray.concat(upperCaseValues, specialCharacterValues)
+ } else if (numericPrompt && specialCharacterPrompt) {
+  updatedArray = userChoicesPWArray.concat(numericValues, specialCharacterValues)
+ } else if (lowerCasePrompt) {
+  updatedArray = userChoicesPWArray.concat(lowerCaseValues)
+ } else if (upperCasePrompt) {
+  updatedArray = userChoicesPWArray.concat(upperCaseValues)
+ } else if (numericPrompt) {
+  updatedArray = userChoicesPWArray.concat(numericValues)
+ } else if (specialCharacterPrompt) {
+  updatedArray = userChoicesPWArray.concat(specialCharacterValues)
+ } 
+
+ passwordText.textContent = generateUpdatedArray(updatedArray) ///this is good.
+
+///passwordText.textContent = updatedArray ---> dont delete this, this may be key
+ console.log(updatedArray) /////This definitely displays the updated array
+//passwordText.textContent = generateUpdatedArray(updatedArray) ///This becomes undefined when NO prompts are shown. 
+
+  //passwordText.textContent = "SamplePassWord!"
 }
 
-//// filter out non selected prompts that weren't selected
+generateBtn.addEventListener("click", function () {// attach the event listener once the password is generated. 
 
-//// Loop over length, call a generator function for each type
+//consider taking out most of the error handling 
+//make and wrap in a function this generating of a password
+//once you have the users choices, make it random,  then use a loop to iterate the number they selected
 
-//// We need to add final password
-
-
-//const typesCount = lowerCase + upperCase + number + specialCharacter + 
-//console.log('typesCount:', typesCount)
-//const typesArr = [{lowerCase}, {upperCase}, {number}, {specialCharacter}].filter(function () {
-
-//})
-//console.log('typesArr', typesArr)
-
-
-
- passwordText.textContent = "SamplePassWord!"
-}
-
-/// gotta figure out what to do with this
-let randomFunction = {
-  lower: generateLowerCase,
-  upper: generateUpperCase,
-  number: generateNumber,
-  symbol: generateSpecialCharacter
-}
-/////
-
-generateBtn.addEventListener("click", function () {
   lengthPrompt = window.prompt('Please enter the LENGTH of your password in DIGITS. It can be from 8 to 128 characterssssss.');
 
   if (lengthPrompt >= 8 && lengthPrompt <= 128) {
     lengthValue = +lengthPrompt; ///lenghtPrompt is now a number instead of a string.
     lowerCasePrompt = window.confirm('Would you like lower case letters to be included? Select OK for Yes or Cancel for NO');
 
-    if (lowerCasePrompt || !lowerCasePrompt) {
-      upperCasePrompt = window.confirm('Would you like upper case letters to be included in your password?');
-    }
+    upperCasePrompt = window.confirm('Would you like upper case letters to be included in your password?');
 
-    if (upperCasePrompt || !upperCasePrompt) {
-      numericPrompt = window.confirm('Would you like any numbers to be included in your password?');
-    }
+    numericPrompt = window.confirm('Would you like any numbers to be included in your password?');
 
-    if (numericPrompt || !numericPrompt) {
-      specialCharacterPrompt = window.confirm('Would you like any special characters to be included in your password?');
-    }
+    specialCharacterPrompt = window.confirm('Would you like any special characters to be included in your password?');
 
-    if (specialCharacterPrompt || !specialCharacterPrompt) {
-      window.alert('Generating password right now');
-      passwordText = generatePassword(lowerCaseValues, upperCaseValues, numericValues, specialCharacterValues, lengthValue);
-      console.log(generateLowerCase(lowerCaseValues));
-    }
+    window.alert('Generating Password now.')
+
+    generatePassword(updatedArray)
+    //passwordText.textContent = generatePassword()
 
   } else if (lengthPrompt <= 7) {
     window.alert('Password length is too short.');
@@ -140,9 +162,11 @@ generateBtn.addEventListener("click", function () {
     window.alert('Please enter a number.');
   }
 
-console.log(lengthValue) /// this displays the length value
-console.log(lowerCasePrompt)
+
+  console.log(lengthValue) /// this displays the length value
+  console.log(lowerCasePrompt)
 });
+
 
 console.log(generateLowerCase(lowerCaseValues))
 console.log(generateUpperCase(upperCaseValues))
